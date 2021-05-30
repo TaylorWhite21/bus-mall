@@ -27,6 +27,7 @@ section {
 section img {
   width: 300px;
   height: 500px;
+  padding: 5px;
 }
 
 main div {
@@ -36,4 +37,8 @@ main div {
   margin: auto;
   margin-top: 10px;
   border-radius: 10px;
+}
+
+main div:hover, section img:hover {
+  cursor: pointer;
 }
