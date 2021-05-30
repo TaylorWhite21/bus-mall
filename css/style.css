@@ -1,0 +1,44 @@
+body {
+  background-color:lawngreen;
+}
+
+h1 {
+  text-align: center;
+  font-size: 3em;
+
+}
+
+h3 {
+  text-align: center;
+  font-size: 2em;
+  margin-top: 10px;
+}
+
+div {
+  text-align: center;
+}
+
+section {
+  background-color: blue;
+  width: max-content;
+  margin: auto;
+}
+
+section img {
+  width: 300px;
+  height: 500px;
+  padding: 5px;
+}
+
+main div {
+  background-color: yellow;
+  width: max-content;
+  padding: 10px;
+  margin: auto;
+  margin-top: 10px;
+  border-radius: 10px;
+}
+
+main div:hover, section img:hover {
+  cursor: pointer;
+}
