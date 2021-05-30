@@ -1,20 +1,8 @@
 'use strict';
 
-
-// Features
-  // DONE: constructor: name, times image was shown, file path, number of times a pic was clicked
-  // DONE: image generator to show 3 images
-  // DONE: count how many times an image has been displayed
-  // event listener for the images that activates on click
-  // once image is clicked, show 3 new images
-  // create x amount of rounds that the images go through
-  // once x amount of rounds has been achieved, remove image event listeners
-  // once survey has been completed, display a view results button that when clicked displays all products and shows the votes it recieved, and times it was viewed
-
 //Global Variables
 let allProducts = [];
 let randomProductArray = [];
-let displayedProducts = [];
 let clicks = 0;
 let maxClicks = 25;
 
@@ -75,20 +63,19 @@ function renderRandomProduct() {
 
   firstImage.src = allProducts[product1].src;
   firstImage.alt = allProducts[product1].name;
-  console.log(`first image: ${firstImage.alt}`);
   allProducts[product1].views++;
 
   secondImage.src = allProducts[product2].src;
   secondImage.alt = allProducts[product2].name;
-  console.log(`second image: ${secondImage.alt}`);
   allProducts[product2].views++;
 
   thirdImage.src = allProducts[product3].src;
   thirdImage.alt = allProducts[product3].name;
-  console.log(`third image: ${thirdImage.alt}`);
   allProducts[product3].views++;
 }
 
+// if product is clicked: increase its clicks by 1 and renders new images.
+// once max clicks is achieved, it removes event listener.
 function handleProductClick (event){
   if (event.target === myContainer){
     alert('Please click on a picture please.');
@@ -98,7 +85,6 @@ function handleProductClick (event){
   for (let i = 0; i < allProducts.length; i++){
     if (clickedProduct === allProducts[i].name){
       allProducts[i].clicks++;
-      console.log(allProducts[i].clicks);
     }
   }
   clicks++;
@@ -109,15 +95,27 @@ function handleProductClick (event){
   }
 }
 
-function handlResultsClick (event){
+// Renders the statistics for each image
+function renderResults (){
   let ul = document.getElementById('totalResults');
   for (let i = 0; i < allProducts.length; i++){
-    let li = document.createElement(li);
-    li.textContent = ``
+    let li = document.createElement('li');
+    li.textContent = `The ${allProducts[i].name} product was viewed ${allProducts[i].views} times and clicked on ${allProducts[i].clicks} times(s)`;
+    ul.appendChild(li);
+    // console.log('li');
   }
 }
 
+// when clicks are at maximum, button is allowed to render results
+function handleResultsClick (event){ //eslint-disable-line
+  if (clicks === maxClicks){
+    renderResults();
+  }
+}
+
+
 renderRandomProduct();
 
+//Event listeners
 myContainer.addEventListener('click', handleProductClick);
-resultsButton.addEventListener('click', handlResultsClick);
+resultsButton.addEventListener('click', handleResultsClick);
