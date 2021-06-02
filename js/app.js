@@ -102,7 +102,6 @@ function renderResults (){
     let li = document.createElement('li');
     li.textContent = `The ${allProducts[i].name} product was viewed ${allProducts[i].views} times and clicked on ${allProducts[i].clicks} times(s)`;
     ul.appendChild(li);
-    // console.log('li');
   }
 }
 
@@ -111,6 +110,7 @@ function handleResultsClick (event){ //eslint-disable-line
   if (clicks === maxClicks){
     renderResults();
   }
+  resultsButton.removeEventListener('click', handleResultsClick);
 }
 
 
