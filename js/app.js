@@ -3,7 +3,7 @@
 //Global Variables
 let allProducts = [];
 let clicks = 0;
-let maxClicks = 2;
+let maxClicks = 25;
 let clicksRemaining = 26;
 let renderQ = [];
 
@@ -72,7 +72,6 @@ function renderRandomProduct() {
   thirdImage.src = allProducts[product3].src;
   thirdImage.alt = allProducts[product3].name;
   allProducts[product3].views++;
-  renderClicksRemaining();
 }
 
 // if product is clicked: increase its clicks by 1 and renders new images.
@@ -86,9 +85,10 @@ function handleProductClick(event) {
   for (let i = 0; i < allProducts.length; i++) {
     if (clickedProduct === allProducts[i].name) {
       allProducts[i].clicks++;
+      clicks++;
+      renderClicksRemaining();
     }
   }
-  clicks++;
   renderRandomProduct();
 
   if (clicks === maxClicks) {
@@ -111,7 +111,7 @@ function renderChart() {
   }
 
   var ctx = document.getElementById('myChart').getContext('2d');
-  var myChart = new Chart(ctx, {
+  var myChart = new Chart(ctx, { // eslint-disable-line
     type: 'bar',
     data: {
       labels: names,
@@ -157,6 +157,7 @@ function renderClicksRemaining () {
 }
 
 renderRandomProduct();
+renderClicksRemaining();
 
 //Event listeners
 myContainer.addEventListener('click', handleProductClick);
