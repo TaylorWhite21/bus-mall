@@ -5,6 +5,7 @@ let allProducts = [];
 let randomProductArray = [];
 let clicks = 0;
 let maxClicks = 25;
+let renderQ = [];
 
 //Element grabbers
 let myContainer = document.getElementById('products');
@@ -44,22 +45,24 @@ new Product('water-can');
 new Product('wine-glass');
 
 // Selects random product number
-function selectRandomProduct (){
+function selectRandomProduct() {
   return Math.floor(Math.random() * allProducts.length);
 }
 
 // renders 3 images and reruns if selected image is already in the array, then increase veiw count for displayed image
 function renderRandomProduct() {
-  while (randomProductArray.length < 3){
-    let randomProduct = selectRandomProduct();
-    while (!randomProductArray.includes(randomProduct)){
-      randomProductArray.push(randomProduct);
+  while (renderQ.length < 6) {
+    let uniqueIndex = selectRandomProduct();
+    if (!renderQ.includes(uniqueIndex)) {
+      renderQ.unshift(uniqueIndex);
     }
   }
+  console.log(renderQ);
 
-  let product1 = randomProductArray.shift();
-  let product2 = randomProductArray.shift();
-  let product3 = randomProductArray.shift();
+
+  let product1 = renderQ.pop();
+  let product2 = renderQ.pop();
+  let product3 = renderQ.pop();
 
   firstImage.src = allProducts[product1].src;
   firstImage.alt = allProducts[product1].name;
@@ -76,29 +79,29 @@ function renderRandomProduct() {
 
 // if product is clicked: increase its clicks by 1 and renders new images.
 // once max clicks is achieved, it removes event listener.
-function handleProductClick (event){
-  if (event.target === myContainer){
+function handleProductClick(event) {
+  if (event.target === myContainer) {
     alert('Please click on a picture please.');
   }
 
   let clickedProduct = event.target.alt;
-  for (let i = 0; i < allProducts.length; i++){
-    if (clickedProduct === allProducts[i].name){
+  for (let i = 0; i < allProducts.length; i++) {
+    if (clickedProduct === allProducts[i].name) {
       allProducts[i].clicks++;
     }
   }
   clicks++;
   renderRandomProduct();
 
-  if (clicks === maxClicks){
+  if (clicks === maxClicks) {
     myContainer.removeEventListener('click', handleProductClick);
   }
 }
 
 // Renders the statistics for each image
-function renderResults (){
+function renderResults() {
   let ul = document.getElementById('totalResults');
-  for (let i = 0; i < allProducts.length; i++){
+  for (let i = 0; i < allProducts.length; i++) {
     let li = document.createElement('li');
     li.textContent = `The ${allProducts[i].name} product was viewed ${allProducts[i].views} times and clicked on ${allProducts[i].clicks} times(s)`;
     ul.appendChild(li);
@@ -106,13 +109,21 @@ function renderResults (){
 }
 
 // when clicks are at maximum, button is allowed to render results
-function handleResultsClick (event){ //eslint-disable-line
-  if (clicks === maxClicks){
+function handleResultsClick(event) { //eslint-disable-line
+  if (clicks === maxClicks) {
     renderResults();
   }
   resultsButton.removeEventListener('click', handleResultsClick);
 }
 
+
+
+
+//function create and render chart
+//pull chart js
+//create new arrays for the information and push the allproducts information into them
+//make it so it only appears once clicks = 0
+//add counter to show how many clicks are left to replace the view results feature
 
 renderRandomProduct();
 
