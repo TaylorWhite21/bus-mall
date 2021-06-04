@@ -2,14 +2,13 @@
 
 //Global Variables
 let allProducts = [];
-let randomProductArray = [];
 let clicks = 0;
-let maxClicks = 25;
+let maxClicks = 2;
+let clicksRemaining = 26;
 let renderQ = [];
 
 //Element grabbers
 let myContainer = document.getElementById('products');
-let resultsButton = document.getElementById('results');
 let firstImage = document.getElementById('firstImage');
 let secondImage = document.getElementById('secondImage');
 let thirdImage = document.getElementById('thirdImage');
@@ -57,8 +56,6 @@ function renderRandomProduct() {
       renderQ.unshift(uniqueIndex);
     }
   }
-  console.log(renderQ);
-
 
   let product1 = renderQ.pop();
   let product2 = renderQ.pop();
@@ -75,6 +72,7 @@ function renderRandomProduct() {
   thirdImage.src = allProducts[product3].src;
   thirdImage.alt = allProducts[product3].name;
   allProducts[product3].views++;
+  renderClicksRemaining();
 }
 
 // if product is clicked: increase its clicks by 1 and renders new images.
@@ -95,38 +93,70 @@ function handleProductClick(event) {
 
   if (clicks === maxClicks) {
     myContainer.removeEventListener('click', handleProductClick);
+    document.getElementById('myChart').style.display = 'block';
+    renderChart();
   }
 }
 
-// Renders the statistics for each image
-function renderResults() {
-  let ul = document.getElementById('totalResults');
+//Renders chart information once clicks have reached 25
+function renderChart() {
+  let clicks = [];
+  let views = [];
+  let names = [];
+
   for (let i = 0; i < allProducts.length; i++) {
-    let li = document.createElement('li');
-    li.textContent = `The ${allProducts[i].name} product was viewed ${allProducts[i].views} times and clicked on ${allProducts[i].clicks} times(s)`;
-    ul.appendChild(li);
+    clicks.push(allProducts[i].clicks);
+    views.push(allProducts[i].views);
+    names.push(allProducts[i].name);
   }
+
+  var ctx = document.getElementById('myChart').getContext('2d');
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: names,
+      datasets: [{
+        label: '# of Views',
+        data: views,
+        backgroundColor: [
+          'rgba(89, 199, 207, 1)',
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+        ],
+        borderWidth: 1
+      },
+      {
+        label: '# of Clicks',
+        data: clicks,
+        backgroundColor: [
+          'rgba(209, 87, 185, 1)'
+        ],
+        borderColor: [
+          'rgba(89, 199, 207, 1)'
+        ],
+        borderWidth: 1
+      }
+      ]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
 }
 
-// when clicks are at maximum, button is allowed to render results
-function handleResultsClick(event) { //eslint-disable-line
-  if (clicks === maxClicks) {
-    renderResults();
-  }
-  resultsButton.removeEventListener('click', handleResultsClick);
+//Displays how many rounds are left
+function renderClicksRemaining () {
+  let counter = document.getElementById('counter');
+  clicksRemaining--;
+  counter.innerHTML = `Rounds Remaining: ${clicksRemaining}`;
 }
-
-
-
-
-//function create and render chart
-//pull chart js
-//create new arrays for the information and push the allproducts information into them
-//make it so it only appears once clicks = 0
-//add counter to show how many clicks are left to replace the view results feature
 
 renderRandomProduct();
 
 //Event listeners
 myContainer.addEventListener('click', handleProductClick);
-resultsButton.addEventListener('click', handleResultsClick);

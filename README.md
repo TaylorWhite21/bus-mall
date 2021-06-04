@@ -8,8 +8,11 @@ This is a website for data collection. The customer wants to collect data on wha
 ### Author: Taylor White
 
 ### Links and Resources
-* Any Links you used as reference
+* https://www.chartjs.org
+* https://codepen.io/juliogcampos/pen/BzdjwY
+* https://stackoverflow.com/questions/22402777/html-javascript-button-click-counter
+* https://www.hexcolortool.com/s
 
 ### Reflections and Comments
-* Consider including the answers to your daily journal and submission questions here
-* This is also a good place to reflect on the tools and resources used and learned
+* Consider including the answers to your daily journal and submission questions here.
+* This is also a good place to reflect on the tools and resources used and learned.

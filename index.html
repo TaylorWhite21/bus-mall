@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>Bus Mall Market Analysis</title>
   <link rel="stylesheet" href="css/reset.css">
@@ -11,17 +12,27 @@
     <h1>Bus Mall Market Analysis</h1>
   </header>
 
-<main>
-  <h3>Choose which product you like best!</h3>
-  <section id="products">
-    <img id = "firstImage">
-    <img id = "secondImage">
-    <img id = "thirdImage">
-  </section>
-  <div id="results">View Results</div>
-  <ul id="totalResults"></ul>
-</main>
+  <main>
+    <h3>Choose which product you like best!</h3>
+    <section id="products">
+      <img id="firstImage">
+      <img id="secondImage">
+      <img id="thirdImage">
+    </section>
 
+    <div>
+      <article id ="counter">Rounds Remaining</article>
+      
+    </div>
+    <section>
+      <canvas id="myChart" width="1500" height="600"></canvas>
+    </section>
+    <!-- <div id="results">View Results</div>
+    <ul id="totalResults"></ul> -->
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="js/app.js"></script>
 </body>
+
 </html>

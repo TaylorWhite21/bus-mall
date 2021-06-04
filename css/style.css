@@ -37,8 +37,21 @@ main div {
   margin: auto;
   margin-top: 10px;
   border-radius: 10px;
+  margin-bottom: 10px;
 }
 
 main div:hover, section img:hover {
   cursor: pointer;
+}
+
+section canvas {
+  display: none;
+  background-color: white;
+  width: max-content;
+  margin-bottom: 100px;
+}
+
+article {
+  margin: auto;
+  text-align: center;
 }
