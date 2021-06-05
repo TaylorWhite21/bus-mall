@@ -7,7 +7,7 @@ h1 {
   font-size: 3em;
   background-color: teal;
   display: inline;
-  margin-left: 36.5%;
+  margin-left: 36%;
 
 }
 
@@ -30,7 +30,7 @@ section {
 }
 
 section img {
-  width: 300px;
+  width: 500px;
   height: 500px;
   padding: 5px;
 }
@@ -61,4 +61,8 @@ article {
   margin: auto;
   text-align: center;
   font-size: 2em;
+}
+
+#products{
+  margin-top: 20px;
 }
